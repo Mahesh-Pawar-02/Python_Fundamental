@@ -1,0 +1,18 @@
+import pikepdf
+
+def unlock_pdf(input_pdf, output_pdf, password):
+    try:
+        with pikepdf.open(input_pdf, password=password) as pdf:
+            pdf.save(output_pdf)
+        print(f"Successfully unlocked {input_pdf} and saved as {output_pdf}")
+    except pikepdf._qpdf.PasswordError:
+        print("Incorrect password.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Example usage
+input_pdf = 'locked.pdf'
+output_pdf = 'unlocked.pdf'
+password = 'your_password'
+
+unlock_pdf(input_pdf, output_pdf, password)
